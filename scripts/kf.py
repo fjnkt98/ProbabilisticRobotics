@@ -97,23 +97,25 @@ class KalmanFilter(object):
 # In[71]:
 
 
-def trial():
-    time_interval = 0.1
-    world = World(30, time_interval, debug=False)
-    
-    m = Map()
-    for ln in [(-4, 2), (2, -3), (3, 3)]:
-        m.append_landmark(Landmark(*ln))
-    world.append(m)
-    
-    initial_pose = np.array([0, 0, 0]).T
-    kf = KalmanFilter(m, initial_pose)
-    circling = EstimationAgent(time_interval, 0.2, 10.0/180*math.pi, kf)
-    r = Robot(initial_pose, sensor=Camera(m), agent=circling, color="red")
-    world.append(r)
-    
-    world.draw()
+
 
 if __name__ == "__main__":
+    def trial():
+        time_interval = 0.1
+        world = World(30, time_interval, debug=False)
+
+        m = Map()
+        for ln in [(-4, 2), (2, -3), (3, 3)]:
+            m.append_landmark(Landmark(*ln))
+        world.append(m)
+
+        initial_pose = np.array([0, 0, 0]).T
+        kf = KalmanFilter(m, initial_pose)
+        circling = EstimationAgent(time_interval, 0.2, 10.0/180*math.pi, kf)
+        r = Robot(initial_pose, sensor=Camera(m), agent=circling, color="red")
+        world.append(r)
+
+        world.draw()
+    
     trial()
 
